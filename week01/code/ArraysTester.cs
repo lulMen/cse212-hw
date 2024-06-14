@@ -38,8 +38,21 @@ public static class ArraysTester {
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+        // STEPS:
+        //  1.   Create an empty fixed-size array to store the results.
+        //  2.   Iterate through the possible number of multiples using a 'for' loop.
+        //          - Multiply the given number by the current iteration plus 1.
+        //          - Store the multiple in the array.
+        //  3.   Return the array.
 
-        return new double[0]; // replace this return statement with your own
+        var results = new double[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            results[i] = number * (i + 1);
+        }
+
+        return results; // replace this return statement with your own
     }
     
     /// <summary>
@@ -56,6 +69,18 @@ public static class ArraysTester {
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+        // STEPS:
+        //  1.  Create variable for the number of items in the list.
+        //  2.  Split the list into right and left halves.
+        //  3.  Clear the original list and then add the right half follow by the left half.
+        
+        int count = data.Count;
 
+        var right = data.GetRange(count - amount, amount);
+        var left = data.GetRange(0, count - amount);
+
+        data.Clear();
+        data.AddRange(right);
+        data.AddRange(left);
     }
 }
