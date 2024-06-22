@@ -14,7 +14,13 @@ public class CustomerService {
         // Scenario: 
         // Expected Result: 
         Console.WriteLine("Test 1");
-
+        var cs = new CustomerService(3);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        cs.ServeCustomer();
+        cs.ServeCustomer();
+        Console.WriteLine(cs);
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
@@ -88,9 +94,14 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+        if (_queue.Count <= 0)
+        {
+            Console.WriteLine("No Customers in the queue");
+        } else {
+            var customer = _queue[0];
+            _queue.RemoveAt(0);
+            Console.WriteLine(customer);
+        }
     }
 
     /// <summary>
