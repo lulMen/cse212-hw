@@ -16,6 +16,7 @@
         while (players.Length > 0)
             players.GetNextPerson();
         // Defect(s) Found: 
+        // Queue is out of order
 
         Console.WriteLine("---------");
 
@@ -39,6 +40,7 @@
             players.GetNextPerson();
 
         // Defect(s) Found: 
+        // None
 
         Console.WriteLine("---------");
 
@@ -57,6 +59,7 @@
             // Console.WriteLine(players);
         }
         // Defect(s) Found: 
+        // Tim does not have infinite turns
 
         Console.WriteLine("---------");
 
@@ -74,6 +77,7 @@
             // Console.WriteLine(players);
         }
         // Defect(s) Found: 
+        // None
 
         Console.WriteLine("---------");
 
@@ -84,5 +88,6 @@
         players = new TakingTurnsQueue();
         players.GetNextPerson();
         // Defect(s) Found:
+        // None
     }
 }
