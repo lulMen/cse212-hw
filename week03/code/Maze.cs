@@ -30,6 +30,14 @@ public class Maze {
     /// </summary>
     public void MoveLeft() {
         // FILL IN CODE
+        var DIR_INDEX = 0;
+        var paths = _mazeMap[(_currX, _currY)];
+        if (!paths[DIR_INDEX])
+        {
+            Console.WriteLine("Can't go that way!");
+        } else {
+            _currX -= 1;
+        }
     }
 
     /// <summary>
@@ -38,6 +46,14 @@ public class Maze {
     /// </summary>
     public void MoveRight() {
         // FILL IN CODE
+        var DIR_INDEX = 1;
+        var paths = _mazeMap[(_currX, _currY)];
+        if (!paths[DIR_INDEX])
+        {
+            Console.WriteLine("Can't go that way!");
+        } else {
+            _currX += 1;
+        }
     }
 
     /// <summary>
@@ -46,6 +62,14 @@ public class Maze {
     /// </summary>
     public void MoveUp() {
         // FILL IN CODE
+        var DIR_INDEX = 2;
+        var paths = _mazeMap[(_currX, _currY)];
+        if (!paths[DIR_INDEX])
+        {
+            Console.WriteLine("Can't go that way!");
+        } else {
+            _currY -= 1;
+        }
     }
 
     /// <summary>
@@ -54,6 +78,14 @@ public class Maze {
     /// </summary>
     public void MoveDown() {
         // FILL IN CODE
+        var DIR_INDEX = 3;
+        var paths = _mazeMap[(_currX, _currY)];
+        if (!paths[DIR_INDEX])
+        {
+            Console.WriteLine("Can't go that way!");
+        } else {
+            _currY += 1;
+        }        
     }
 
     public void ShowStatus() {

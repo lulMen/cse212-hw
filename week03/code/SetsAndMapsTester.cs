@@ -73,7 +73,7 @@ public static class SetsAndMapsTester {
         maze.MoveDown();
         maze.MoveDown();
         maze.MoveRight();
-        maze.ShowStatus(); // Should be at (6,6)
+        maze.ShowStatus(); // Should be at (6,6) 
 
         // Problem 5: Earthquake
         // Sample Test Cases (may not be comprehensive) 
@@ -111,6 +111,20 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        var pairs = new HashSet<string>(); 
+
+        foreach (string word in words)
+        {
+            char[] charArray = word.ToCharArray();
+            Array.Reverse(charArray);
+            string pair = new string(charArray);
+
+            if (pairs.Contains(pair))
+                Console.WriteLine($"{word} & {pair}");
+            
+            pairs.Add(word);
+        }
+
     }
 
     /// <summary>
@@ -132,6 +146,12 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+
+            var education = fields[3];
+            if (degrees.ContainsKey(education))
+                degrees[education] += 1;
+            else
+                degrees[education] = 1;
         }
 
         return degrees;
@@ -158,7 +178,49 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        var letters1 = new Dictionary<string, int>();
+        var letters2 = new Dictionary<string, int>();
+
+        word1 = word1.ToLower().Replace(" ", "");
+        word2 = word2.ToLower().Replace(" ", "");
+
+        if (word1.Count() == word2.Count())
+        {
+            foreach (char c in word1)
+            {
+                var letter = c.ToString();
+                if (letters1.ContainsKey(letter))
+                    letters1[letter]++;
+                else
+                    letters1[letter] = 1;
+            }
+
+            foreach (char c in word2)
+            {
+                var letter = c.ToString();
+                if (letters2.ContainsKey(letter))
+                    letters2[letter]++;
+                else
+                    letters2[letter] = 1;
+            }
+
+            foreach (KeyValuePair<string, int> kvp in letters1)
+            {
+                var key = kvp.Key;
+                // var value = kvp.Value;
+
+                // Console.WriteLine($"{letters1[key]} {letters2[key]}");
+
+                if (!letters2.ContainsKey(key))
+                    return false;
+                else if (letters1[key] != letters2[key])
+                    return false;
+            }
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
     /// <summary>
