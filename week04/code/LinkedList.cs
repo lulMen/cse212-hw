@@ -28,6 +28,18 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void InsertTail(int value) {
         // TODO Problem 1
+        Node newNode = new Node(value);
+        // If the list is empty, then point both head and tail to the new node.
+        if (_tail is null)
+        {
+            _head = newNode;
+            _tail = newNode;
+        // If the list is not empty, then only tail will be affected.
+        } else {
+            newNode.Prev = _tail; // Connect new node to the previous tail
+            _tail.Next = newNode; // Connect the previous tail to the new node
+            _tail = newNode; // Update the tail to point to the new node
+        }
     }
 
 
@@ -56,6 +68,15 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void RemoveTail() {
         // TODO Problem 2
+        if (_tail == _head)
+        {
+            _head = null;
+            _tail = null;
+        } else if (_tail is not null)
+        {
+            _tail.Prev!.Next = null;
+            _tail = _tail.Prev;
+        }
     }
 
     /// <summary>
@@ -75,9 +96,11 @@ public class LinkedList : IEnumerable<int> {
                 // For any other location of 'value', need to create a 
                 // new node and reconnect the links to insert.
                 else {
-                    Node newNode = new(newValue);
-                    newNode.Prev = curr; // Connect new node to the node containing 'value'
-                    newNode.Next = curr.Next; // Connect new node to the node after 'value'
+                    Node newNode = new(newValue)
+                    {
+                        Prev = curr, // Connect new node to the node containing 'value'
+                        Next = curr.Next // Connect new node to the node after 'value'
+                    };
                     curr.Next!.Prev = newNode; // Connect node after 'value' to the new node
                     curr.Next = newNode; // Connect the node containing 'value' to the new node
                 }
@@ -94,6 +117,25 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void Remove(int value) {
         // TODO Problem 3
+        var current = _head;
+        while (current != null)
+        {
+            if (current.Data == value)
+            {
+                if (current.Prev == null)
+                    RemoveHead();
+                else if (current.Next == null)
+                    RemoveTail();
+                else
+                {
+                    current.Next!.Prev = current.Prev;
+                    current.Prev!.Next = current.Next;
+                }
+                current = null;
+            } else {
+                current = current.Next;
+            }
+        }
     }
 
     /// <summary>
@@ -101,6 +143,30 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void Replace(int oldValue, int newValue) {
         // TODO Problem 4
+        var current = _head;
+        while (current != null)
+        {
+            if (current.Data == oldValue)
+            {
+                if (current.Prev == null)
+                {
+                    RemoveHead();
+                    InsertHead(newValue);
+                }
+                else if (current.Next == null)
+                {
+                    RemoveTail();
+                    InsertTail(newValue);
+                }
+                else
+                {
+                    InsertAfter(oldValue, newValue);
+                    current.Prev!.Next = current.Next;
+                    current.Next!.Prev = current.Prev;
+                }
+            }
+            current = current.Next;
+        }
     }
 
     /// <summary>
@@ -127,7 +193,12 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public IEnumerable Reverse() {
         // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        var current = _tail;
+        while (current != null)
+        {
+            yield return current.Data;
+            current = current.Prev;
+        }
     }
 
     public override string ToString() {
