@@ -26,11 +26,19 @@ public class Node {
 
     public bool Contains(int value) {
         // TODO Start Problem 2
-        return false;
+        if (value == Data) {
+            return true;
+        } else if (value < Data) {
+            return Left?.Contains(value) ?? false;
+        } else {
+            return Right?.Contains(value) ?? false;
+        }
     }
 
     public int GetHeight() {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        var heightLeft = Left?.GetHeight() ?? 0;
+        var heightRight = Right?.GetHeight() ?? 0;
+        return 1 + Math.Max(heightLeft, heightRight);
     }
 }
